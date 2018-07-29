@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      <div id="chau" >
+      <div>
       <Navigation />
         <Switch>
           <Route path="/" exact component={Principal} />
