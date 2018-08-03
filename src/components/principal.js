@@ -6,12 +6,10 @@ import Grid from '@material-ui/core/Grid';
 
 const API_URL = 'http://pokeapi.salestock.net/api/v2/pokemon/'
 
-let random = Math.floor(Math.random() * 100)
-
 const styles = {
   main: { textAlign: 'center' },
   grid: { direction: 'row', justifyContent: 'center', textAlign: 'center', alignItems: 'center' },
-  title: { margin: 30 }
+  title: { margin: 30, fontFamily: 'Arial', fontWeight: 800, color: 'rgba(0, 124, 155, 0.664)' }
 }
 
 
@@ -19,13 +17,18 @@ class Principal extends Component {
   constructor() {
     super()
     this.state = {}
+
+    this.random = Math.floor(Math.random() * 100)
   }
 
   componentDidMount() {
-    let url = API_URL + random
-    fetch(url).then(d => d.json()).then(resp => this.setState({
-      data: resp
-    }))
+    let url = API_URL + this.random
+    if (url) {
+      //console.log('Hace el llamado')
+      fetch(url).then(d => d.json()).then(resp => this.setState({
+        data: resp
+      }))
+    }
   }
 
 
@@ -45,7 +48,7 @@ class Principal extends Component {
 
           {
             this.state.data ? <React.Fragment> <Grid item md={3} >
-              <img src={this.state.data.sprites.front_default} height="300px"  alt={this.state.data.name} />
+              <img src={this.state.data.sprites.front_default} height="300px" alt={this.state.data.name} />
             </Grid>
 
 
@@ -62,7 +65,7 @@ class Principal extends Component {
               </Grid>
 
 
-            </React.Fragment> : <CircularProgress style={{ margin: 50 }} size={60} />
+            </React.Fragment> : <CircularProgress style={{ margin: 50, color: '#007C9B' }} size={60} />
 
           }
 

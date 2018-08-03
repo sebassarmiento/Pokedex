@@ -5,8 +5,8 @@ import logo from '../img/pokelogo.png'
 
 const styles = {
     navLink: {textDecoration: 'none', justifyContent: 'center'},
-    navButton: {marginLeft: 20, padding: 10, fontSize: 18, color: '#000' },
-    main: {backgroundColor: '#33c9dc'}
+    navButton: {marginLeft: 20, padding: 10, fontSize: 18, color: '#E6F4F1' },
+    main: {backgroundColor: '#007C9B'}
 }
 
 class Home extends Component {
@@ -25,9 +25,6 @@ class Home extends Component {
                         </NavLink>
                         <NavLink to='/personajes' style={styles.navLink}>
                             <div style={styles.navButton} >Personajes</div>
-                        </NavLink>
-                        <NavLink to='/contact' style={styles.navLink}>
-                            <div style={styles.navButton} >Contact</div>
                         </NavLink>
                     </Toolbar>
                 </AppBar>
