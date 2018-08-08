@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 
 
-const API_URL = 'http://pokeapi.salestock.net/api/v2/pokemon/'
+const API_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
 const styles = {
   main: { justifyContent: 'center', padding: 30, paddingTop: 0 },
@@ -30,7 +30,6 @@ class Home extends Component {
 
     this.clickedButton = this.clickedButton.bind(this)
     this.volver = this.volver.bind(this)
-    this.getMoreData = this.getMoreData.bind(this)
     this.nextPage = this.nextPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
   }
@@ -38,13 +37,12 @@ class Home extends Component {
   componentWillUnmount = () => (console.log('Unmounted'), this.mounted = false)
 
   componentDidMount() {
-    console.log(this.props.location)
     this.mounted = true
     !this.state.data ? this.getData(API_URL) : null
   }
 
   getData(url) {
-    //console.log('Llamada general')
+    
     fetch(url).then(d => d.json()).then(resp => resp.previous !== null ? this.setState({
       data: resp.results,
       next: resp.next,
@@ -57,35 +55,6 @@ class Home extends Component {
     ))
   }
 
-  getMoreData(url) {
-    let run = true
-    const pokeList = this.state.data
-    for (let i = 0; i < this.urlList.length; i++) {
-      if (url === this.urlList[i]) {
-        run = false
-        //console.log(url, this.urlList[i])
-      }
-    }
-    /*if(run && pokeList){
-      fetch(url).then(d => this.mounted ? d.json() : null ).then(resp => {
-        console.log(pokeList, resp.id, this.offset )
-        if (pokeList && !pokeList[(resp.id - this.offset)].img && this.mounted) {
-          //console.log(this.state.data)
-          this.urlList.push(url)
-          pokeList[(resp.id - this.offset)] && resp.sprites.front_default ? pokeList[(resp.id - this.offset)].img = resp.sprites.front_default : pokeList[(resp.id - this.offset)].img = Logo
-          //console.log(pokeList, pokeList[(resp.order - this.offset)], (resp.order - this.offset))
-          this.setState({
-            data: pokeList
-          })
-        } else {
-          console.log(resp, this.urlList);
-        } 
-       } )
-    } else {
-      console.log('No llama individual')
-    }*/
-  }
-
 
   capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -93,7 +62,7 @@ class Home extends Component {
 
 
   clickedButton(event) {
-    //console.log('entra')
+    
     this.setState({ poke: ' ' });
     fetch(event.target.id).then(d => d.json()).then(resp => this.setState({ poke: resp }))
   }
@@ -105,7 +74,7 @@ class Home extends Component {
   }
 
   nextPage() {
-    //console.log(this.state.next)
+    
     this.getData(this.state.next)
     this.offset += 20
     this.urlList = []
@@ -117,7 +86,7 @@ class Home extends Component {
   }
 
   previousPage() {
-    //console.log(this.state.prev)
+    
     this.getData(this.state.prev)
     this.offset -= 20
     this.urlList = []
@@ -165,10 +134,8 @@ class Home extends Component {
               this.state.data && this.count ?
 
                 this.state.data.map(data => {
-                  //console.log(this.state.data)
-                  //console.log('Mapea')
+  
                   this.count = null
-                  !data.img ? this.getMoreData(data.url) : console.log('No entra', data)
 
                   return (<Grid item md={3} key={data.url} >
                     <CardPoke name={this.capitalize(data.name)} url={data.url} clickedButton={this.clickedButton} img={data.img} hash={data.name} />
@@ -181,9 +148,6 @@ class Home extends Component {
                     <CardPoke name={this.capitalize(data.name)} url={data.url} clickedButton={this.clickedButton} img={data.img} hash={data.name} />
                   </Grid>)
                 })
-
-
-
 
                   : <CircularProgress style={{ margin: 50, color: '#007C9B' }} size={60} />
           }

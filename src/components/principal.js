@@ -4,7 +4,7 @@ import { CircularProgress } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
 
-const API_URL = 'http://pokeapi.salestock.net/api/v2/pokemon/'
+const API_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
 const styles = {
   main: { textAlign: 'center' },
@@ -24,7 +24,7 @@ class Principal extends Component {
   componentDidMount() {
     let url = API_URL + this.random
     if (url) {
-      //console.log('Hace el llamado')
+      console.log(url)
       fetch(url).then(d => d.json()).then(resp => this.setState({
         data: resp
       }))

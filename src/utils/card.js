@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { CircularProgress } from '@material-ui/core';
+import Logo from '../img/Pokeball.png'
 import { Link } from 'react-router-dom';
 
 
@@ -22,9 +22,7 @@ class CardPoke extends Component {
 
                 <CardContent style={styles.card} >
 
-                    {
-                        this.props.img ? <img src={this.props.img} alt="" height="200px" /> : <CircularProgress style={styles.loading} />
-                    }
+                    <img src={Logo} height="200px" style={{ borderRadius: '10px' }}  />
 
                     <Typography gutterBottom variant="display1" component="h2">
                         {this.props.name}
